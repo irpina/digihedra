@@ -1,35 +1,35 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
-/* DigiHedra's UI, on the pedal shell (pedal_ui.inc: the pages, SETUP, presets, TAP, BYPASS, the owner):
+/* DigiTriad's UI, on the pedal shell (pedal_ui.inc: the pages, SETUP, presets, TAP, BYPASS, the owner):
  *
- *   1 HEDRA     PITCH 1 PITCH 2 PITCH 3 MIX / TIME FEEDBACK KEY MICROTUNE
- *   2 ALT       TIME DIVISION 1-3 GLIDE / the voices' LEVELs, OUT  (the Hedra's Alt functions, and more)
+ *   1 TRIAD     PITCH 1 PITCH 2 PITCH 3 MIX / TIME FEEDBACK KEY MICROTUNE
+ *   2 ALT       TIME DIVISION 1-3 GLIDE / the voices' LEVELs, OUT
  *   3 SETTINGS  MODE (PITCH FEEDBACK, SERIES, DUAL + CROSS, DUAL) SCALE RHYTHM CORRECTION /
  *               ALGORITHM (CLASSIC, SMOOTH) HALF SPEED, PITCH SMOOTHING, SPREAD
  *   T1 PITCH: tap to turn the voices' intervals off (they repeat at unison) or on; hold for a moment's change
- *   T2 SWELL: tap to latch the swell (each note fades in), hold for a moment's swell (the Hedra's TAP held)
+ *   T2 SWELL: tap to latch the swell (each note fades in), hold for a moment's swell
  *   T3 HALF SPEED: tap to turn it on or off
  *   T4 FREEZE: tap to latch, hold for a moment: the delay goes round as it is
  *   trig 1-12  KEY C .. B;  trig 13  KEY CHROMATIC;  trig 14  the next SCALE
- *   MIDI: the Hedra's chart: HALF SPEED 9, the pedal on 14 (below 64 bypassed), TIME 15, KEY 16, MICROTUNE 17,
+ *   MIDI CCs: HALF SPEED 9, the pedal on 14 (below 64 bypassed), TIME 15, KEY 16, MICROTUNE 17,
  *   MIX 18, PITCH 1-3 19-21, SCALE 22, CORRECTION + GLIDE 23, FEEDBACK 24, TIME DIVISION 1-3 25-27, TAP 28 (127),
  *   MODE 29, PITCH SMOOTHING 30, SWELL 31 */
 #pragma GCC optimize ("no-tree-loop-distribute-patterns")
-#include "dhedra.h"
+#include "dtriad.h"
 #include "tables.h"
 
 #define PD_TAG      0x44484544u             /* "DHED" */
-#define PD_NAME     "DIGIHEDRA"
+#define PD_NAME     "DIGITRIAD"
 #define PD_SAVE_VER 1
 #define PD_KBIP     ((1 << K_P1) | (1 << K_P2) | (1 << K_P3))
 #define PD_SBIP     0
 #define PD_NCFG     0
 
-/* The Mod Menu's DIGIHEDRA: a pyramid, its three faces */
+/* The Mod Menu's DIGITRIAD: a pyramid, its three faces */
 static const u16 pd_icon[16] = {
     0x0000, 0x0100, 0x0380, 0x0540, 0x0540, 0x0920, 0x0920, 0x1110,
     0x1110, 0x2108, 0x2108, 0x4104, 0x4104, 0xfffe, 0x0000, 0x0000
 };
-static const char *const pd_title[3] = { "Hedra", "Alt", "Settings" };
+static const char *const pd_title[3] = { "Triad", "Alt", "Settings" };
 static const char *const pd_klbl[8] = { "PIT1", "PIT2", "PIT3", "MIX", "TIME", "FDBK", "KEY", "MTUN" };
 static const u8 pd_kdef[8] = PD_KDEF;
 static const char *const pd_slbl[8] = { "TDV1", "TDV2", "TDV3", "GLID", "LEV1", "LEV2", "LEV3", "OUT" };
@@ -104,7 +104,7 @@ static int fx_cc(int cc, int v)
         set_ctl(0, knob_cc[cc - 16], v);
     } else if (cc == 15) {
         set_ctl(0, K_TIME, v);
-    } else if (cc == 22) {                      /* SCALE: the Hedra's bands */
+    } else if (cc == 22) {                      /* SCALE: in bands */
         static const u8 from[6] = { 12, 38, 59, 79, 98, 120 };
         int s = 0;
         while (s < 6 && v >= from[s])
@@ -187,7 +187,7 @@ static int fx_value(void *bmp, const void *font, int x, int y, int pg, int i)
         } else if (i == K_MIX || i == K_FDBK) {
             TEXTF(bmp, font, x, y, -1, "%d%%", v * 100 / 127);
         } else if (i == K_TIME) {
-            if (dhedra_tempo()) {
+            if (dtriad_tempo()) {
                 int d = v * 7 / 128;
                 TEXTF(bmp, font, x, y, -1, "%s %dMS", times[d > 6 ? 6 : d], (int)(ST.val[V_TIME] / 48));
             } else {

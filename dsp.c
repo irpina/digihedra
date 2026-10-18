@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
-/* DigiHedra's render: a Hedra-style three-voice rhythmic pitch shifter. core-dn1 calls it at interrupt level for
+/* DigiTriad's render: a three-voice rhythmic pitch shifter. core-dn1 calls it at interrupt level for
  * every block while the page is open (the pedal shell, pedal_dsp.inc, around fx_block). The inputs, summed to
  * mono, go onto a line, and three voices read it back:
  *   PITCH 1-3  each voice's interval, -2 .. +2 octaves (0 is OFF), as semitones with KEY on CHROMATIC, or as
  *              steps of the SCALE in the KEY from the note a pitch detector hears in the input (diatonic)
- *   the voices each sit behind their own time division of the main TIME (Alt + PITCH on the Hedra: off, a micro
+ *   the voices each sit behind their own time division of the main TIME (TDV1-3: off, a micro
  *              delay, 1/6 .. 1 of it), or behind a RHYTHM pattern's, and pan left, centre and right
  *   MODE       what the delay does with them: SERIES (one line repeating the voices every TIME), PITCH FEEDBACK
  *              (the repeats go back through the pitch shifters, so they climb or fall), DUAL (a line a side)
@@ -20,7 +20,7 @@
  * 192-sample frame, its 192 lags spread over 32 blocks.
  * Fixed point as the shell's; delays on the lines in frames Q12. */
 #pragma GCC optimize ("no-tree-loop-distribute-patterns")
-#include "dhedra.h"
+#include "dtriad.h"
 #include "tables.h"
 
 #define COLD    __attribute__((optimize("Os")))     /* once a block or less: small beats fast */

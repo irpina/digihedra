@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
-/* DigiHedra: a Hedra-style three-voice rhythmic pitch shifter for the Digitone mk1's inputs, on the pedal shell
+/* DigiTriad: a three-voice rhythmic pitch shifter for the Digitone mk1's inputs, on the pedal shell
  * (pedal.h). Shared by dsp.c (the render, interrupt level) and ui.c (the UI task). */
-#ifndef DHEDRA_H
-#define DHEDRA_H
+#ifndef DTRIAD_H
+#define DTRIAD_H
 
-#define PD(x) dhedra_##x
+#define PD(x) dtriad_##x
 #include "pedal.h"
 
 /* The buffers: the region mod.json claims in the profile's bulk area. The OS never clears it, so the UI clears
@@ -27,13 +27,13 @@
 enum { K_P1, K_P2, K_P3, K_MIX, K_TIME, K_FDBK, K_KEY, K_MTUN };        /* page 1 */
 enum { S_TD1, S_TD2, S_TD3, S_GLIDE, S_LEV1, S_LEV2, S_LEV3, S_OUT };   /* page 2 */
 enum { O_MODE, O_SCALE, O_RHYTHM, O_CORR, O_ALGO, O_HALF, O_SMOOTH, O_SPREAD };   /* page 3 */
-enum { MODE_PFB, MODE_SERIES, MODE_DUALX, MODE_DUAL };   /* as the Hedra's CC 29, in its order */
+enum { MODE_PFB, MODE_SERIES, MODE_DUALX, MODE_DUAL };   /* in CC 29's order */
 enum { SC_MAJ, SC_MIN, SC_MEL, SC_HARM, SC_DBL, SC_LYDP, SC_MINP };
 enum { CORR_NONE, CORR_LOOSE, CORR_STRICT };
 enum { ALGO_CLASSIC, ALGO_SMOOTH };
 enum { SP_WIDE, SP_NARROW, SP_MONO };
 enum { SW_HARM, SW_SWELL, SW_HALF, SW_FREEZE };         /* T1-T4 (T3's state is the HALF setting) */
-#define KEY_CHROMATIC   120                             /* KEY from here up: chromatic, as the Hedra's */
+#define KEY_CHROMATIC   120                             /* KEY from here up: chromatic */
 /* the controls' defaults (ui.c, and the host's tests) */
 #define PD_KDEF     { 97, 120, 8, 64, 82, 40, 127, 0 }
 #define PD_SDEF     { 0, 64, 97, 0, 64, 64, 64, 64 }

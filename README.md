@@ -1,38 +1,39 @@
-# DigiHedra
+# DigiTriad
 
-A three-voice rhythmic pitch shifter for the Digitone mk1's audio inputs,
-after the [Meris Hedra](https://meris.us/product/hedra-pedal/): three
-pitched voices from two octaves down to two octaves up, chromatic or in a
+A three-voice rhythmic pitch shifter for the Digitone mk1's audio inputs:
+three pitched voices from two octaves down to two octaves up, chromatic or in a
 key and scale from the note a pitch detector hears in what you play, with
 MICROTUNE, GLIDE and pitch CORRECTION; each voice behind its own division of
-a delay in time with the Digitone's tempo, in the Hedra's four delay modes
+a delay in time with the Digitone's tempo, in four delay modes
 (PITCH FEEDBACK, SERIES, DUAL + CROSS, DUAL), with rhythm patterns, HALF
-SPEED, SWELL, FREEZE, presets and the Hedra's MIDI CCs. DigiHedra is an
-elekloader mod for core-dn1 3.2. It is not affiliated with Meris and uses
-none of its code; the effect is rebuilt from the Hedra's public manual and
-its MIDI chart.
+SPEED, SWELL, FREEZE, presets and MIDI CCs. DigiTriad is an
+elekloader mod for core-dn1 3.2.
 
-DIGIHEDRA is an entry in core-dn1's Mod Menu (hold a track key). While its
-page is open, DigiHedra owns the audio engine, as DigiCosm and DigiChroma do
+Its MIDI CCs follow the Meris Hedra's published CC chart, so a controller set
+up for that pedal works with it too. DigiTriad is not affiliated with Meris
+and uses none of its code.
+
+DIGITRIAD is an entry in core-dn1's Mod Menu (hold a track key). While its
+page is open, DigiTriad owns the audio engine, as DigiSwarm and DigiPrism do
 (core-dn1 3.2's `core_audio`): the synths are silent, the Digitone's own
 effects are off, and what you hear is the inputs through the pedal. NO gives
 the audio and the screen back. The sequencer keeps running, so PLAY, STOP and
 TEMPO still work and the delay can follow the Digitone's tempo. BYPASS
 (trig 16) passes the inputs through dry, with the delay's tails.
 
-**DigiHedra 0.1 is a beta (a pre-release).** It runs on a Digitone mk1, its
-author's, where it loads and works as expected, and was checked in digikit's
-emulator ([digiemu](https://github.com/irpina/digiemu)) on OS 1.43 and 1.44.
-Its source is also in elekloader, as `mods/digihedra-dn1`
-([irpina/elekloader#96](https://github.com/irpina/elekloader/pull/96)).
+**DigiTriad 0.1.1 is a beta (a pre-release).** It is the same code as 0.1 under
+its own name, with its own names for the effects; only names changed. 0.1
+runs on a Digitone mk1, its author's, where it loads and works as expected,
+and 0.1.1 was checked in digikit's emulator
+([digiemu](https://github.com/irpina/digiemu)) on OS 1.43 and 1.44. Its
+source is also in elekloader, as
+[mods/digitriad-dn1](https://github.com/irpina/elekloader/tree/main/mods/digitriad-dn1).
+A project saved with 0.1 loads in 0.1.1.
 
-![DIGIHEDRA in core-dn1's Mod Menu](docs/mod-menu.png)
-![Page 1: the three pitches, MIX / TIME, FEEDBACK, KEY, MICROTUNE](docs/page1.png)
-![Page 2: the voices' divisions and levels, GLIDE, OUT](docs/page2.png)
-![Page 3: the delay mode, scale, rhythm and the rest](docs/page3.png)
-![KEY set to D](docs/key-d.png)
-![Page 3 in PITCH FEEDBACK mode](docs/page3-pfb.png)
-![FREEZE latched](docs/freeze.png)
+![DIGITRIAD in core-dn1's Mod Menu](docs/mod-menu.png)
+![Page 1](docs/page1.png)
+![Page 2](docs/page2.png)
+![Page 3](docs/page3.png)
 ![SETUP](docs/setup.png)
 
 The screenshots are from the emulator, which has no DMA timer 0, so the `C`
@@ -44,15 +45,16 @@ there.
 You need:
 - **elekloader from its main branch,** with Python 3.9 or newer (see
   [its README](https://github.com/irpina/elekloader#install)), or elekloader's
-  web page, which runs it. DigiHedra keeps 896 KB of buffers in the Digitone
+  web page, which runs it. DigiTriad keeps 896 KB of buffers in the Digitone
   profile's `bulk` area, which the 0.4.0 app does not know: it refuses
-  DigiHedra.
+  DigiTriad.
 - **This mod and its core,** from
-  [this repository's releases](https://github.com/irpina/digihedra/releases):
-  `digihedra-0.1.elemod` and `core-dn1-3.2.elemod` for OS 1.43, or
-  `digihedra-0.1-os1.44.elemod` and `core-dn1-3.2-os1.44.elemod` for 1.44.
-  DigiHedra needs core-dn1 3.2 or newer. With several effects mods in one build
-  (the other pedals, DigiCosm, DigiChroma), take core-dn1 4.0 from
+  [this repository's releases](https://github.com/irpina/digitriad/releases):
+  `digitriad-0.1.1.elemod` and `core-dn1-3.2.elemod` for OS 1.43, or
+  `digitriad-0.1.1-os1.44.elemod` and `core-dn1-3.2-os1.44.elemod` for 1.44.
+  DigiTriad needs core-dn1 3.2 or newer. With several effects mods in one build
+  (DigiSwarm, DigiPrism, DigiTide, DigiTriad, DigiReel, DigiHoard,
+  DigiHalo), take core-dn1 4.0 from
   [elekloader's pre-release](https://github.com/irpina/elekloader/releases/tag/core-dn1-v4.0)
   instead: it has the RAM for them.
 - **The stock OS file:** `Digitone_and_Digitone_Keys_OS1.44.syx` or
@@ -61,12 +63,12 @@ You need:
   elekloader recognises the file by its hash.
 
 Build your OS on the command line (or in elekloader's window, run from
-source: **+ Install from file...** both files and tick **digihedra**):
+source: **+ Install from file...** both files and tick **digitriad**):
 
 ```bash
 python -m elekloader.patch --stock Digitone_and_Digitone_Keys_OS1.44.syx \
-    --mod core-dn1-3.2-os1.44.elemod --mod digihedra-0.1-os1.44.elemod \
-    --out Digitone_OS1.44-digihedra.syx --version HE01
+    --mod core-dn1-3.2-os1.44.elemod --mod digitriad-0.1.1-os1.44.elemod \
+    --out Digitone_OS1.44-digitriad.syx --version TR01
 ```
 
 `--version` is the 4 characters the unit will show. Flash the `.syx` with
@@ -80,12 +82,12 @@ startup menu, and press **TRIG 4** for OS UPGRADE. Then send the stock
 `.syx` with Transfer.
 
 **Opening it:** hold a track key on its own for the Mod Menu, then pick
-DIGIHEDRA with its trig key (or YES). NO closes it and gives the synths
+DIGITRIAD with its trig key (or YES). NO closes it and gives the synths
 back.
 
 ## The page
 
-DigiHedra's page is drawn like the Digitone's own parameter pages: the tempo
+DigiTriad's page is drawn like the Digitone's own parameter pages: the tempo
 in the box at the top left, the page in the title bar (or the state: Freeze,
 Pitch off, Swell), and on the left the note the detector hears (with a bar
 under it while it hears one), the three voices (a square each: filled when
@@ -99,24 +101,24 @@ its default.
 
 | Page | Knobs A-D | Knobs E-H |
 |---|---|---|
-| 1 Hedra (the Hedra's knobs) | PIT1, PIT2, PIT3 (each voice's interval), MIX | TIME (the delay), FDBK (feedback, the Hedra's Alt + MIX), KEY, MTUN (MICROTUNE) |
-| 2 Alt (the Hedra's Alt functions, and more) | TDV1, TDV2, TDV3 (each voice's time division), GLID (GLIDE) | LEV1, LEV2, LEV3 (each voice's level), OUT (output level) |
+| 1 Triad | PIT1, PIT2, PIT3 (each voice's interval), MIX | TIME (the delay), FDBK (feedback), KEY, MTUN (MICROTUNE) |
+| 2 Alt | TDV1, TDV2, TDV3 (each voice's time division), GLID (GLIDE) | LEV1, LEV2, LEV3 (each voice's level), OUT (output level) |
 | 3 Settings | MODE (PFB, SER, DX, DUAL), SCAL (the scale), RHYT (a rhythm pattern, or MAN: the TDV knobs), CORR (pitch correction: NONE, LOOS, STRC) | ALGO (CLAS, SMTH), HALF (half speed), SMTH (pitch smoothing), SPRD (WIDE, NARR, MONO) |
 
-| Hedra | DigiHedra |
+| Control | |
 |---|---|
-| PITCH 1-3: -2 octaves .. +2 octaves, OFF at the minimum, unison in the middle | PIT1-3, the same bands as the Hedra's chart (chromatic, seven-note and pentatonic charts) |
-| KEY (maximum: chromatic); Alt: the scale | KEY (the Hedra's bands, the top CHROMATIC); SCAL on page 3; trig 1-12 set the key C .. B, trig 13 chromatic, trig 14 the next scale |
-| MICRO TUNE | MTUN: voice 1 up to 30 cents sharp, voice 2 as flat, voice 3 half of it |
-| Alt + MICRO TUNE: correction (lower half), glide (upper half) | CORR on page 3 and GLID on page 2 (CC 23 does both, as the Hedra's) |
-| MIX; Alt: feedback | MIX; FDBK |
-| Alt + PITCH 1-3: time divisions | TDV1-3 on page 2, the Hedra's divisions: OFF, a micro range (3-42 ms), 1/6, 1/4, 1/3, 3/8, 1/2, 5/8, 2/3, 3/4, 5/6, 7/8, 1 of the time |
-| TAP footswitch: the tempo (in quarters) | trig 15, TAP; or the Digitone's tempo (SETUP's CLOCK); TIME picks the delay as a division of it |
-| Hold TAP: a momentary swell | T2 held; T2 tapped latches it (and CC 31) |
-| Alt + TAP: half speed | T3, or HALF on page 3 |
-| The mode button: four delay modes | MODE on page 3 |
-| BYPASS; Alt + BYPASS: pitch knob smoothing | trig 16; SMTH on page 3 |
-| 16 presets | 8: in SETUP a trig key 1-8 saves the pedal there; FUNC + a trig key 1-8 recalls it |
+| PIT1-3 | -2 octaves .. +2 octaves, OFF at the minimum, unison in the middle, in bands (chromatic, seven-note and pentatonic charts) |
+| KEY | in bands, the top CHROMATIC; SCAL on page 3 picks the scale; trig 1-12 set the key C .. B, trig 13 chromatic, trig 14 the next scale |
+| MTUN | voice 1 up to 30 cents sharp, voice 2 as flat, voice 3 half of it |
+| CORR, GLID | CORR on page 3 and GLID on page 2 (CC 23 does both: correction in its lower half, glide in its upper) |
+| MIX, FDBK | the mix; the feedback |
+| TDV1-3 | page 2, the time divisions: OFF, a micro range (3-42 ms), 1/6, 1/4, 1/3, 3/8, 1/2, 5/8, 2/3, 3/4, 5/6, 7/8, 1 of the time |
+| TAP | trig 15, the tempo (in quarters); or the Digitone's tempo (SETUP's CLOCK); TIME picks the delay as a division of it |
+| SWELL | T2 held: a momentary swell; T2 tapped latches it (and CC 31) |
+| HALF SPEED | T3, or HALF on page 3 |
+| MODE | four delay modes, on page 3 |
+| BYPASS, SMTH | trig 16; pitch knob smoothing, SMTH on page 3 |
+| Presets | 8: in SETUP a trig key 1-8 saves the pedal there; FUNC + a trig key 1-8 recalls it |
 | Expression pedal, MIDI notes setting the voices | not here (see Not yet) |
 
 ## Track keys
@@ -125,7 +127,7 @@ its default.
   at unison, so the delay goes on as a plain rhythmic delay) or back on;
   hold for a moment's change.
 - **T2 SWELL**: tap to latch the swell, hold for a moment's: each new note
-  starts from silence and fades in over 0.4 s, as the Hedra's held TAP.
+  starts from silence and fades in over 0.4 s.
 - **T3 HALF SPEED**: tap for half speed: the times double (up to 1 s) and the
   repeats darken.
 - **T4 FREEZE**: tap to latch, hold for a moment: the delay goes round as it
@@ -158,8 +160,8 @@ scale keeps its offset from the scale note under it. CORRECTION pulls the
 voices onto the scale's exact pitches when you play out of tune: NONE keeps
 your intonation, LOOS halves the error, STRC removes it. The scales: Major,
 Minor, Melodic Minor, Harmonic Minor, Double Harmonic, Lydian Pentatonic and
-Minor Pentatonic. Diatonic harmonies need one note at a time, as on the
-Hedra; for chords and pads use CHROMATIC (KEY at the top).
+Minor Pentatonic. Diatonic harmonies need one note at a time; for chords
+and pads use CHROMATIC (KEY at the top).
 
 **GLIDE** slides each voice to a new interval, from at once (0) to a time
 constant of 2 s; with SMTH (pitch smoothing) on, changes take 25 ms at
@@ -168,9 +170,8 @@ least, so turning a PITCH knob sweeps; off, they step.
 ## The delay
 
 TIME is the main delay: with CLOCK on DIGITONE (or TAP) a division of the
-tempo (1/16, 1/8T, 1/8, 1/8D, 1/4, 1/4D, 1/2), halved until it fits, as the
-Hedra fits its tapped tempo (520 ms in the series modes, 260 ms in the dual
-ones; HALF SPEED doubles both); on FREE, 20 to 520 ms. Each voice sits
+tempo (1/16, 1/8T, 1/8, 1/8D, 1/4, 1/4D, 1/2), halved until it fits
+(520 ms in the series modes, 260 ms in the dual ones; HALF SPEED doubles both); on FREE, 20 to 520 ms. Each voice sits
 behind its own division of TIME (TDV1-3, or the RHYTHM pattern), and the
 repeats come every TIME after it. Turning TIME or a division bends the
 repeats as a tape's would (half a frame a frame at most).
@@ -199,25 +200,25 @@ is shared between the voices that are on.
 
 ## MIDI
 
-DigiHedra takes the Hedra's CCs (its manual's chart) that come on the
+DigiTriad takes its MIDI CCs (the chart below) that come on the
 Digitone's auto channel (MIDI CONFIG > CHANNELS > AUTO CHANNEL), through
 core-dn1's `ev_midi_cc`, while its page is open; with SETUP's CC CLOSED on,
 also while it is closed, and with MIDI CC on ANY CH on a track's channel too.
-The Digitone does not apply a CC DigiHedra takes; every other CC goes on to
+The Digitone does not apply a CC DigiTriad takes; every other CC goes on to
 the Digitone. MIDI CONFIG > PORT CONFIG > INPUT FROM has to let them in.
 
 | CC | | CC | |
 |---|---|---|---|
 | 9 | HALF SPEED: off below 64, on from 64 | 22 | SCALE: Major 0-11, Minor 12-37, Melodic 38-58, Harmonic 59-78, Double Harmonic 79-97, Lydian Pentatonic 98-119, Minor Pentatonic 120-127 |
 | 14 | bypassed below 64, on from 64 | 23 | CORRECTION (0-63: NONE, LOOSE, STRICT by thirds; GLIDE off) and GLIDE (64-127) |
-| 15 | TIME (the Hedra's tempo) | 24 | FEEDBACK |
-| 16 | KEY (the Hedra's bands; 120-127 chromatic) | 25-27 | TIME DIVISION 1-3 |
+| 15 | TIME | 24 | FEEDBACK |
+| 16 | KEY (in bands; 120-127 chromatic) | 25-27 | TIME DIVISION 1-3 |
 | 17 | MICROTUNE | 28 | TAP (at 127) |
 | 18 | MIX | 29 | MODE: PITCH FEEDBACK 0-31, SERIES 32-63, DUAL + CROSS 64-95, DUAL 96-127 |
 | 19-21 | PITCH 1-3 | 30 | PITCH SMOOTHING: off below 64 |
 | | | 31 | SWELL: off below 64 |
 
-The Hedra's CC 4 (its expression pedal) and program changes (its presets)
+CC 4 (an expression pedal) and program changes (presets)
 are not mapped: there is no expression morph here, and core-dn1 passes mods
 the CCs only.
 
@@ -232,7 +233,7 @@ and the lines hold them at half scale. The UI (`ui.c`) runs in the
 Digitone's UI task.
 
 - **Memory:** the voices' line (1.4 s mono), the delay's (1.4 s stereo) and the
-  detector's 4 KB: 388 KB of DigiHedra's 896 KB region in the profile's `bulk` area, cleared
+  detector's 4 KB: 388 KB of DigiTriad's 896 KB region in the profile's `bulk` area, cleared
   in two ticks the first time; the code and its state take 25.6 KB of
   the 128 KB mods share.
 - **CPU:** in digikit's emulator, with plucks on the inputs: see Checked.
@@ -250,12 +251,12 @@ Digitone's UI task.
 With the SDK and a stock OS file:
 
 ```bash
-python -m elekloader.sdk.build . --stock Digitone_and_Digitone_Keys_OS1.43.syx   # out/digihedra-0.1.elemod
-python -m elekloader.sdk.build . --stock Digitone_and_Digitone_Keys_OS1.44.syx   # out/digihedra-0.1-os1.44.elemod
+python -m elekloader.sdk.build . --stock Digitone_and_Digitone_Keys_OS1.43.syx   # out/digitriad-0.1.1.elemod
+python -m elekloader.sdk.build . --stock Digitone_and_Digitone_Keys_OS1.44.syx   # out/digitriad-0.1.1-os1.44.elemod
 ```
 
 It names no firmware address, so its 1.44 port is empty. It needs core-dn1
-3.2. `gentables.py` makes `tables.h` (the Hedra's PITCH, KEY and time
+3.2. `gentables.py` makes `tables.h` (the PITCH, KEY and time
 division charts are there as tables).
 
 ## Checked
@@ -266,7 +267,7 @@ compiled for a computer and fed test signals (`tests.sh`):
 - **On a unit:** tested on a Digitone mk1 by its author: it loads and works
   as expected. It is still a beta.
 
-- **The firmware.** A build with the released core-dn1 3.2 and DigiHedra
+- **The firmware.** A build with the released core-dn1 3.2 and DigiTriad
   passes every stage of the emulator's check against stock on 1.43 and
   1.44, with every screen identical.
 - **The page and the keys** (1.43): the Mod Menu entry, the three pages,
@@ -275,11 +276,11 @@ compiled for a computer and fed test signals (`tests.sh`):
   FREEZE, the left column showing them) and tapped again (off), T4 held (a
   moment's FREEZE), trig 3 (KEY D), trig 13 (CHROMATIC), trig 14 (the next
   scale), page 3's MODE turned to PITCH FEEDBACK, BYPASS, NO (the synths
-  back, the owner off), as screenshots and as the state DigiHedra keeps.
+  back, the owner off), as screenshots and as the state DigiTriad keeps.
 - **MIDI** (1.43): each kind of CC in the chart on the auto channel (PITCH,
   KEY, MIX, FEEDBACK, a TIME DIVISION, SCALE's bands, CC 23's CORRECTION
   and GLIDE halves, MODE's bands, HALF SPEED, SWELL, PITCH SMOOTHING,
-  bypass and on) set DigiHedra and stopped at core's site; a CC outside the
+  bypass and on) set DigiTriad and stopped at core's site; a CC outside the
   chart went on.
 - **Pitch** (a 440 Hz sine, all wet, by zero crossings): chromatic +7
   659.2 Hz (659.3), -12 219.8 (220.0), +24 1760.5 (1760.0), -24 109.8
@@ -312,20 +313,19 @@ compiled for a computer and fed test signals (`tests.sh`):
   (the Digitone's own render about 17%), the whole render 43.4% of a block
   at the defaults (three voices, SMTH, SERIES, chromatic), 43.9% in a key,
   44.5% at the heaviest tried (PITCH FEEDBACK, SMTH, three voices, a key,
-  feedback up; its worst block 47.7%), so DigiHedra itself takes about 27%.
+  feedback up; its worst block 47.7%), so DigiTriad itself takes about 27%.
   Closed, the stock render again.
 
 ## Not yet
 
-- MIDI notes setting the voices (the Hedra tunes its voices to notes played
-  on a keyboard): core-dn1 passes mods the CCs only.
-- The expression pedal's morph between two settings, and the Hedra's 16
-  presets (the project has room for eight).
-- Which scale "Double Harmonic" is: the manual's chart names it without its
-  notes; DigiHedra uses the double harmonic major (1, b2, 3, 4, 5, b6, 7).
-- The Hedra's own pitch shifting and its exact delay routing are not
-  published; PFB's repeat time (TIME plus the voice's division) is this
-  mod's reading of "repeats recycled through the pitch shifters".
+- MIDI notes setting the voices (tuning them to notes played on a
+  keyboard): core-dn1 passes mods the CCs only.
+- An expression pedal's morph between two settings, and 16 presets (the
+  project has room for eight).
+- Which scale "Double Harmonic" is: the name comes without its notes;
+  DigiTriad uses the double harmonic major (1, b2, 3, 4, 5, b6, 7).
+- PFB's repeat time (TIME plus the voice's division) is this mod's reading
+  of repeats recycled through the pitch shifters.
 
 ## Licence
 
